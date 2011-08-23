@@ -17,7 +17,18 @@ Gem::Specification.new do |s|
     "README.rdoc"
   ]
   s.files = [
-    "VERSION"
+    ".document",
+    ".rspec",
+    "Gemfile",
+    "Gemfile.lock",
+    "LICENSE.txt",
+    "README.rdoc",
+    "Rakefile",
+    "VERSION",
+    "guppy.gemspec",
+    "lib/guppy.rb",
+    "spec/guppy_spec.rb",
+    "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/UnderpantsGnome/guppy}
   s.licenses = ["MIT"]
