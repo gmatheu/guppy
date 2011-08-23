@@ -30,7 +30,7 @@ module Guppy
           Activity.new({
             :parser => self,
             :node => node,
-            :activity_type => Utilities.normalize_activity_type(node.attr('Sport'))
+            :activity_type => Guppy::Utilities.normalize_activity_type(node.attr('Sport'))
           })
         end
 

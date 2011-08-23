@@ -1,7 +1,6 @@
 module Guppy
   class Parser
 
-    include Guppy::Utilities
     attr_accessor :parser
 
     def initialize(file_or_string)
