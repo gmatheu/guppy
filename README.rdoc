@@ -1,19 +1,59 @@
-= guppy
+= Guppy - Ruby library for handling tcx files
 
-Description goes here.
+This library provides a set of classes for working with tcx and gpx
+dumps from GPS devices such as the Garmin Forerunner 305.
 
-== Contributing to guppy
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+== Example
+  parser = Guppy::Parser.new(File.open('spec/data/example.tcx'))
 
-== Copyright
+  activities = parser.activities
 
-Copyright (c) 2011 Michael Moen. See LICENSE.txt for
-further details.
+  activities.each do |activity|
+    puts "Activity type: #{activity.activity_type}"
+    puts "Started at: #{activity.started_at}"
+    puts "Elapsed time: #{activity.elapsed_time}"
+    puts "Distance: #{activity.distance}"
+    puts "Average speed: #{activity.avg_speed}"
+    puts "Maximum speed: #{activity.max_speed}"
+    puts "Calories burned: #{activity.calories_burned}"
+    puts "Average heart rate: #{activity.avg_heart_rate}"
+    puts "Maximum heart rate: #{activity.max_heart_rate}"
+    puts "Average cadence: #{activity.avg_cadence}"
+    puts "Maximum cadence: #{activity.max_cadence}"
+    puts ""
 
+    activity.laps.each do |lap|
+      puts "  Started at: #{lap.started_at}"
+      puts "  Elapsed time: #{lap.elapsed_time}"
+      puts "  Distance: #{lap.distance}"
+      puts "  Average speed: #{lap.avg_speed}"
+      puts "  Maximum speed: #{lap.max_speed}"
+      puts "  Calories burned: #{lap.calories_burned}"
+      puts "  Average heart rate: #{lap.avg_heart_rate}"
+      puts "  Maximum heart rate: #{lap.max_heart_rate}"
+      puts "  Average cadence: #{lap.avg_cadence}"
+      puts "  Maximum cadence: #{lap.max_cadence}"
+      puts ""
+    end
+  end
+
+== TODO
+
+* Get aggregated pace and heart rate signals for an activity
+* Make it faster and avoid re-parsing the db in some instances
+* A nicer way to find a specific activity
+
+= Other Stuff
+
+Original Author::  Scott Barron <scott at elitists dot net>
+Remix:: Michael Moen <michael at underpantsgnome dot com>
+License:: Copyright 2009 by Scott Barron.
+          Released under an MIT-style license.  See the MIT-LICENSE
+          file included in the distribution.
+GitHub::  http://github.com/UnderpnatsGnome/guppy/tree/remix
+
+== Warranty
+
+This software is provided "as is" and without any express or implied
+warranties, including, without limitation, the implied warranties of
+merchantibility and fitness for a particular purpose.
