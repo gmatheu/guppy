@@ -17,9 +17,17 @@ module Guppy
       end
 
       def laps(activity)
-        @laps ||= [].tap do |laps|
+        [].tap do |laps|
           activity.css('Lap').each do |node|
             laps << build_lap(node)
+          end
+        end
+      end
+
+      def waypoints(lap)
+        [].tap do |waypoints|
+          lap.css('Trackpoint').each do |node|
+            waypoints << build_waypoint(node)
           end
         end
       end
@@ -48,6 +56,14 @@ module Guppy
             :max_heart_rate => node.at_css('MaximumHeartRateBpm Value').text.to_i,
             :avg_cadence => avg_cadence(node),
             :max_cadence => max_cadence(node),
+          })
+        end
+
+        def build_waypoint(node)
+          Waypoint.new({
+            :lat => node.at_css('LatitudeDegrees').text.to_f,
+            :long => node.at_css('LongitudeDegrees').text.to_f,
+            :altitude => node.at_css('AltitudeMeters').text.to_f
           })
         end
 

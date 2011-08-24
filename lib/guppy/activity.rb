@@ -17,7 +17,7 @@ module Guppy
     end
 
     def laps
-      @laps ||= parser.laps(@node)
+      @laps ||= parser.laps(node)
     end
 
     def inspect

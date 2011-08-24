@@ -33,6 +33,10 @@ dumps from GPS devices such as the Garmin Forerunner 305.
       puts "  Maximum heart rate: #{lap.max_heart_rate}"
       puts "  Average cadence: #{lap.avg_cadence}"
       puts "  Maximum cadence: #{lap.max_cadence}"
+      puts "  Waypoints: #{lap.waypoints.size}"
+      puts "    First waypoint lat: #{lap.waypoints.first.lat}"
+      puts "    First waypoint long: #{lap.waypoints.first.long}"
+      puts "    First waypoint altitude: #{lap.waypoints.first.altitude}"
       puts ""
     end
   end

@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "Guppy" do
+describe "Guppy::TCX" do
 
   before(:all) do
     @parser = Guppy::Parser.new(File.open('spec/data/example.tcx'))
@@ -24,7 +24,7 @@ describe "Guppy" do
     activity.max_cadence.should eql(126)
   end
 
-  it "should parse activities from a .tcx file" do
+  it "should parse laps from a .tcx file" do
     laps = @parser.activities.first.laps
     laps.size.should eql(2)
 
@@ -51,6 +51,37 @@ describe "Guppy" do
     lap.max_heart_rate.should eql(176)
     lap.avg_cadence.should eql(79)
     lap.max_cadence.should eql(157)
+  end
+
+  it "should parse waypoints from a .tcx file" do
+    laps = @parser.activities.first.laps
+    laps.size.should eql(2)
+
+    lap = laps[0]
+    lap.waypoints.size.should eql(1873)
+
+    waypoint = lap.waypoints.first
+    waypoint.lat.should eql(41.885834)
+    waypoint.long.should eql(-87.616775)
+    waypoint.altitude.should eql(212.871445)
+
+    waypoint = lap.waypoints.last
+    waypoint.lat.should eql(41.795441)
+    waypoint.long.should eql(-87.577663)
+    waypoint.altitude.should eql(184.572368)
+
+    lap = laps[1]
+    lap.waypoints.size.should eql(1711)
+
+    waypoint = lap.waypoints.first
+    waypoint.lat.should eql(41.795427)
+    waypoint.long.should eql(-87.577742)
+    waypoint.altitude.should eql(184.753563)
+
+    waypoint = lap.waypoints.last
+    waypoint.lat.should eql(41.886946)
+    waypoint.long.should eql(-87.617628)
+    waypoint.altitude.should eql(181.981137)
   end
 
 end
