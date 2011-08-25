@@ -35,5 +35,20 @@ module Guppy
     end
     alias :to_s :inspect
 
+    def to_hash
+      {
+        :started_at => started_at,
+        :elapsed_time => elapsed_time,
+        :distance => distance,
+        :avg_speed => avg_speed,
+        :max_speed => max_speed,
+        :calories_burned => calories_burned,
+        :avg_heart_rate => avg_heart_rate,
+        :max_heart_rate => max_heart_rate,
+        :avg_cadence => avg_cadence,
+        :max_cadence => max_cadence
+      }
+    end
+
   end
 end

@@ -19,5 +19,13 @@ module Guppy
     end
     alias :to_s :inspect
 
+    def to_hash
+      {
+        :lat => lat,
+        :long => long,
+        :altitude => altitude
+      }
+    end
+
   end
 end

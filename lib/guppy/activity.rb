@@ -20,6 +20,22 @@ module Guppy
       @laps ||= parser.laps(node)
     end
 
+    def to_hash
+      {
+        :activity_type => activity_type,
+        :started_at => started_at,
+        :elapsed_time => elapsed_time,
+        :distance => distance,
+        :avg_speed => avg_speed,
+        :max_speed => max_speed,
+        :calories_burned => calories_burned,
+        :avg_heart_rate => avg_heart_rate,
+        :max_heart_rate => max_heart_rate,
+        :avg_cadence => avg_cadence,
+        :max_cadence => max_cadence
+      }
+    end
+
     def inspect
       %Q{
         #<#{self.class}
