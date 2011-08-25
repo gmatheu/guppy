@@ -1,8 +1,10 @@
 require 'time'
 require 'nokogiri'
 
-Dir.glob('lib/**/*.rb').each do |lib|
-  load lib unless lib =~ /guppy.rb$/
+base_dir = File.dirname(__FILE__)
+
+Dir.glob("#{base_dir}/**/*.rb").each do |lib|
+  require lib
 end
 
 module Guppy
