@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Moen"]
-  s.date = %q{2011-08-22}
+  s.date = %q{2011-08-24}
   s.description = %q{GPS data parser for .tcx files.}
   s.email = %q{michael@underpantsgnome.com}
   s.extra_rdoc_files = [
@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     ".rspec",
+    ".rvmrc",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
@@ -27,8 +28,15 @@ Gem::Specification.new do |s|
     "VERSION",
     "guppy.gemspec",
     "lib/guppy.rb",
-    "spec/guppy_spec.rb",
-    "spec/spec_helper.rb"
+    "lib/guppy/activity.rb",
+    "lib/guppy/lap.rb",
+    "lib/guppy/parser.rb",
+    "lib/guppy/parser/tcx.rb",
+    "lib/guppy/utilities.rb",
+    "lib/guppy/waypoint.rb",
+    "spec/data/example.tcx",
+    "spec/spec_helper.rb",
+    "spec/tcx_spec.rb"
   ]
   s.homepage = %q{http://github.com/UnderpantsGnome/guppy}
   s.licenses = ["MIT"]
@@ -40,21 +48,27 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<rspec>, ["~> 2.3.0"])
+      s.add_runtime_dependency(%q<nokogiri>, ["~> 1.5.0"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.6.0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<rcov>, ["~> 0.9.10"])
+      s.add_development_dependency(%q<wirble>, [">= 0"])
     else
-      s.add_dependency(%q<rspec>, ["~> 2.3.0"])
+      s.add_dependency(%q<nokogiri>, ["~> 1.5.0"])
+      s.add_dependency(%q<rspec>, ["~> 2.6.0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
-      s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<rcov>, ["~> 0.9.10"])
+      s.add_dependency(%q<wirble>, [">= 0"])
     end
   else
-    s.add_dependency(%q<rspec>, ["~> 2.3.0"])
+    s.add_dependency(%q<nokogiri>, ["~> 1.5.0"])
+    s.add_dependency(%q<rspec>, ["~> 2.6.0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
-    s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<rcov>, ["~> 0.9.10"])
+    s.add_dependency(%q<wirble>, [">= 0"])
   end
 end
 
