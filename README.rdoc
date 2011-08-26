@@ -43,9 +43,7 @@ dumps from GPS devices such as the Garmin Forerunner 305.
 
 == TODO
 
-* Get aggregated pace and heart rate signals for an activity
-* Make it faster and avoid re-parsing the db in some instances
-* A nicer way to find a specific activity
+* add din calc for elevation gained
 
 = Other Stuff
 

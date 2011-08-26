@@ -3,7 +3,8 @@ module Guppy
 
     attr_reader :parser, :node, :activity_type, :started_at, :elapsed_time,
       :distance, :avg_speed, :max_speed, :calories_burned, :avg_heart_rate,
-      :max_heart_rate, :avg_cadence, :max_cadence
+      :max_heart_rate, :avg_cadence, :max_cadence, :start_elevation,
+      :max_elevation, :elevation_gained
 
     def initialize(params={})
       @parser = params.delete(:parser)
@@ -26,6 +27,9 @@ module Guppy
         :started_at => started_at,
         :elapsed_time => elapsed_time,
         :distance => distance,
+        :start_elevation => start_elevation,
+        :max_elevation => max_elevation,
+        :elevation_gained => elevation_gained,
         :avg_speed => avg_speed,
         :max_speed => max_speed,
         :calories_burned => calories_burned,
@@ -43,6 +47,9 @@ module Guppy
           started_at: "#{started_at}",
           elapsed_time: #{elapsed_time},
           distance: #{distance},
+          start_elevation: #{start_elevation},
+          max_elevation: #{max_elevation},
+          elevation_gained: #{elevation_gained},
           avg_speed: #{avg_speed},
           max_speed: #{max_speed},
           calories_burned: #{calories_burned},
@@ -60,6 +67,9 @@ module Guppy
         @started_at = nil
         @elapsed_time = 0
         @distance = 0
+        @start_elevation = 0
+        @max_elevation = 0
+        @elevation_gained = 0
         @avg_speed = 0
         @max_speed = 0
         @calories_burned = 0
@@ -69,6 +79,10 @@ module Guppy
         @max_cadence = 0
 
         @started_at = laps.first.started_at
+        @start_elevation = laps.first.start_elevation
+        @max_elevation = laps.map(&:max_elevation).max
+        # NOTE: work out elevation gained numbers
+        @elevation_gained = 0
         @avg_speed += average_across_laps(:avg_speed).round(4)
         @max_speed += average_across_laps(:max_speed).round(4)
         @avg_heart_rate += average_across_laps(:avg_heart_rate).round

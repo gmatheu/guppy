@@ -49,6 +49,9 @@ module Guppy
             :started_at => Time.parse(node.attr('StartTime')),
             :elapsed_time => node.at_css('TotalTimeSeconds').text.to_f,
             :distance => node.at_css('DistanceMeters').text.to_f,
+            :start_elevation => node.at_css('AltitudeMeters').text.to_f,
+            :max_elevation => max_elevation_for_lap(node),
+            :elevation_gained => 0,
             :avg_speed => avg_speed(node),
             :max_speed => node.at_css('MaximumSpeed').text.to_f,
             :calories_burned => node.at_css('Calories').text.to_i,
@@ -65,6 +68,10 @@ module Guppy
             :long => node.at_css('LongitudeDegrees').text.to_f,
             :altitude => node.at_css('AltitudeMeters').text.to_f
           })
+        end
+
+        def max_elevation_for_lap(lap)
+          lap.css('AltitudeMeters').map(&:text).map(&:to_f).max
         end
 
         def avg_speed(node)
