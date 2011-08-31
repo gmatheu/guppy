@@ -43,7 +43,8 @@ dumps from GPS devices such as the Garmin Forerunner 305.
 
 == TODO
 
-* add din calc for elevation gained
+* add support for gpx
+* add support for pwx
 
 = Other Stuff
 
