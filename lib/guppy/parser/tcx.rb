@@ -51,7 +51,6 @@ module Guppy
             :distance => node.at_css('DistanceMeters').text.to_f,
             :start_elevation => node.at_css('AltitudeMeters').text.to_f,
             :max_elevation => max_elevation_for_lap(node),
-            :elevation_gained => 0,
             :avg_speed => avg_speed(node),
             :max_speed => node.at_css('MaximumSpeed').text.to_f,
             :calories_burned => node.at_css('Calories').text.to_i,
@@ -78,7 +77,7 @@ module Guppy
           (
             node.css('DistanceMeters').text.to_f /
             node.css('TotalTimeSeconds').text.to_f
-          ).to_f.round(4)
+          ).to_f.round(6)
         end
 
         def avg_cadence(node)

@@ -21,6 +21,11 @@ module Guppy
       @laps ||= parser.laps(node)
     end
 
+    def elevation_gained
+      puts laps.map(&:elevation_gained).inspect
+      @elevation_gained ||= laps.map(&:elevation_gained).inject(:+)
+    end
+
     def to_hash
       {
         :activity_type => activity_type,
@@ -69,7 +74,7 @@ module Guppy
         @distance = 0
         @start_elevation = 0
         @max_elevation = 0
-        @elevation_gained = 0
+        @elevation_gained = nil
         @avg_speed = 0
         @max_speed = 0
         @calories_burned = 0
@@ -81,10 +86,8 @@ module Guppy
         @started_at = laps.first.started_at
         @start_elevation = laps.first.start_elevation
         @max_elevation = laps.map(&:max_elevation).max
-        # NOTE: work out elevation gained numbers
-        @elevation_gained = 0
-        @avg_speed += average_across_laps(:avg_speed).round(4)
-        @max_speed += average_across_laps(:max_speed).round(4)
+        @avg_speed += average_across_laps(:avg_speed).round(6)
+        @max_speed += average_across_laps(:max_speed).round(6)
         @avg_heart_rate += average_across_laps(:avg_heart_rate).round
         @max_heart_rate += average_across_laps(:max_heart_rate).round
         @avg_cadence += average_across_laps(:avg_cadence).round

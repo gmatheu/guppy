@@ -19,6 +19,25 @@ module Guppy
       @waypoints ||= parser.waypoints(node)
     end
 
+    def elevation_gained
+      unless @elevation_gained
+        gained = 0
+        last_elevation = start_elevation
+
+        waypoints.each do |point|
+          if point.altitude > last_elevation
+            gained += point.altitude - last_elevation
+          end
+
+          last_elevation = point.altitude
+        end
+
+        @elevation_gained = gained.round(6)
+      end
+
+      @elevation_gained
+    end
+
     def to_hash
       {
         :started_at => started_at,
@@ -26,7 +45,6 @@ module Guppy
         :distance => distance,
         :start_elevation => start_elevation,
         :max_elevation => max_elevation,
-        # NOTE: work out elevation gained numbers
         :elevation_gained => elevation_gained,
         :avg_speed => avg_speed,
         :max_speed => max_speed,

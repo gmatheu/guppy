@@ -18,11 +18,10 @@ describe "Guppy::TCX" do
 
     activity.start_elevation.should eql(212.871445)
     activity.max_elevation.should eql(212.871445)
-    # NOTE: work out elevation gained numbers
-    activity.elevation_gained.should eql(0)
+    activity.elevation_gained.should eql(181.529237)
 
-    activity.avg_speed.should eql(7.1054)
-    activity.max_speed.should eql(9.9909)
+    activity.avg_speed.should eql(7.105357)
+    activity.max_speed.should eql(9.990933)
     activity.calories_burned.should eql(1347)
     activity.avg_heart_rate.should eql(168)
     activity.max_heart_rate.should eql(180)
@@ -40,9 +39,8 @@ describe "Guppy::TCX" do
     lap.distance.should eql(12888.303711)
     lap.start_elevation.should eql(212.871445)
     lap.max_elevation.should eql(212.871445)
-    # NOTE: work out elevation gained numbers
-    lap.elevation_gained.should eql(0)
-    lap.avg_speed.should eql(6.8811)
+    lap.elevation_gained.should eql(95.94789)
+    lap.avg_speed.should eql(6.881075)
     lap.max_speed.should eql(10.200533)
     lap.calories_burned.should eql(680)
     lap.avg_heart_rate.should eql(168)
@@ -56,9 +54,8 @@ describe "Guppy::TCX" do
     lap.distance.should eql(12542.463867)
     lap.start_elevation.should eql(184.753563)
     lap.max_elevation.should eql(189.226001)
-    # NOTE: work out elevation gained numbers
-    lap.elevation_gained.should eql(0)
-    lap.avg_speed.should eql(7.3296)
+    lap.elevation_gained.should eql(85.581347)
+    lap.avg_speed.should eql(7.329639)
     lap.max_speed.should eql(9.781333)
     lap.calories_burned.should eql(667)
     lap.avg_heart_rate.should eql(168)
