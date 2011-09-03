@@ -22,7 +22,6 @@ module Guppy
     end
 
     def elevation_gained
-      puts laps.map(&:elevation_gained).inspect
       @elevation_gained ||= laps.map(&:elevation_gained).inject(:+)
     end
 
