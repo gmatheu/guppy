@@ -1,50 +1,45 @@
-# Rakefile for guppy -*- ruby -*-
+# encoding: utf-8
+
 require 'rubygems'
+require 'bundler'
+begin
+  Bundler.setup(:default, :development)
+rescue Bundler::BundlerError => e
+  $stderr.puts e.message
+  $stderr.puts "Run `bundle install` to install missing gems"
+  exit e.status_code
+end
 require 'rake'
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gemspec|
-    gemspec.name = 'guppy'
-    gemspec.summary = 'Ruby library for parsing tcx and gpx files'
-    gemspec.description = 'foo'
-    gemspec.email = 'scott@elitists.net'
-    gemspec.homepage = 'http://github.com/rubyist/guppy'
-    gemspec.authors = ['Scott Barron']
-    gemspec.add_development_dependency "thoughtbot-shoulda", ">= 0"
-  end
+require 'jeweler'
+Jeweler::Tasks.new do |gem|
+  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
+  gem.name = "guppy"
+  gem.homepage = "http://github.com/UnderpantsGnome/guppy"
+  gem.license = "MIT"
+  gem.summary = %Q{GPS data parser.}
+  gem.description = %Q{GPS data parser for .tcx files.}
+  gem.email = "michael@underpantsgnome.com"
+  gem.authors = ["Michael Moen"]
+  # dependencies defined in Gemfile
+end
+Jeweler::RubygemsDotOrgTasks.new
 
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler not available."
+require 'rspec/core'
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.pattern = FileList['spec/**/*_spec.rb']
 end
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
+RSpec::Core::RakeTask.new(:rcov) do |spec|
+  spec.pattern = 'spec/**/*_spec.rb'
+  spec.rcov = true
 end
 
-begin
-  require 'rcov/rcovtask'
-  Rcov::RcovTask.new do |test|
-    test.libs << 'test'
-    test.pattern = 'test/**/test_*.rb'
-    test.verbose = true
-  end
-rescue LoadError
-  task :rcov do
-    abort "RCov is not available."
-  end
-end
+task :default => :spec
 
-task :test => :check_dependencies
-
-task :default => :test
-
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
+require 'rdoc/task'
+RDoc::Task.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'

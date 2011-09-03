@@ -3,36 +3,57 @@
 This library provides a set of classes for working with tcx and gpx
 dumps from GPS devices such as the Garmin Forerunner 305.
 
-== Examples
-  db = Guppy::Db.open('foo.tcx')
-  db.activities.each do |activity|
-    puts activity.date
-  end
+== Example
+  parser = Guppy::Parser.new(File.open('spec/data/example.tcx'))
 
-  run = db.activity('2009-01-12T19:28:18Z')
-  run.laps.each do |lap|
-    puts "Lap Time: #{lap.time}"
-    puts "Lap Distance: #{lap.distance}"
-    puts "Lap Calories: #{lap.calories}"
-    lap.track_points.each do |track_point|
-      puts "#{track_point.latitude} #{track_point.longitude}"
+  activities = parser.activities
+
+  activities.each do |activity|
+    puts "Activity type: #{activity.activity_type}"
+    puts "Started at: #{activity.started_at}"
+    puts "Elapsed time: #{activity.elapsed_time}"
+    puts "Distance: #{activity.distance}"
+    puts "Average speed: #{activity.avg_speed}"
+    puts "Maximum speed: #{activity.max_speed}"
+    puts "Calories burned: #{activity.calories_burned}"
+    puts "Average heart rate: #{activity.avg_heart_rate}"
+    puts "Maximum heart rate: #{activity.max_heart_rate}"
+    puts "Average cadence: #{activity.avg_cadence}"
+    puts "Maximum cadence: #{activity.max_cadence}"
+    puts ""
+
+    activity.laps.each do |lap|
+      puts "  Started at: #{lap.started_at}"
+      puts "  Elapsed time: #{lap.elapsed_time}"
+      puts "  Distance: #{lap.distance}"
+      puts "  Average speed: #{lap.avg_speed}"
+      puts "  Maximum speed: #{lap.max_speed}"
+      puts "  Calories burned: #{lap.calories_burned}"
+      puts "  Average heart rate: #{lap.avg_heart_rate}"
+      puts "  Maximum heart rate: #{lap.max_heart_rate}"
+      puts "  Average cadence: #{lap.avg_cadence}"
+      puts "  Maximum cadence: #{lap.max_cadence}"
+      puts "  Waypoints: #{lap.waypoints.size}"
+      puts "    First waypoint lat: #{lap.waypoints.first.lat}"
+      puts "    First waypoint long: #{lap.waypoints.first.long}"
+      puts "    First waypoint altitude: #{lap.waypoints.first.altitude}"
+      puts ""
     end
   end
 
-
 == TODO
 
-* Get aggregated pace and heart rate signals for an activity
-* Make it faster and avoid re-parsing the db in some instances
-* A nicer way to find a specific activity
+* add support for gpx
+* add support for pwx
 
 = Other Stuff
 
-Author::  Scott Barron <scott at elitists dot net>
+Original Author::  Scott Barron <scott at elitists dot net>
+Remix:: Michael Moen <michael at underpantsgnome dot com>
 License:: Copyright 2009 by Scott Barron.
           Released under an MIT-style license.  See the MIT-LICENSE
           file included in the distribution.
-GitHub::  http://github.com/rubyist/guppy/tree/master
+GitHub::  http://github.com/UnderpnatsGnome/guppy/tree/remix
 
 == Warranty
 

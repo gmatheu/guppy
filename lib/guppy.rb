@@ -1,18 +1,16 @@
-require 'nokogiri'
 require 'time'
+require 'nokogiri'
 
-require File.join(File.dirname(__FILE__), 'guppy', 'activity')
-require File.join(File.dirname(__FILE__), 'guppy', 'track_point')
-require File.join(File.dirname(__FILE__), 'guppy', 'tcx_parser')
-require File.join(File.dirname(__FILE__), 'guppy', 'gpx_parser')
-require File.join(File.dirname(__FILE__), 'guppy', 'db')
-require File.join(File.dirname(__FILE__), 'guppy', 'lap')
+base_dir = File.dirname(__FILE__)
+
+Dir.glob("#{base_dir}/**/*.rb").each do |lib|
+  require lib
+end
 
 module Guppy
-  TCX = 'tcx'
-  GPX = 'gpx'
-  
-  def self.version
-    "0.0.1"
-  end
+  TCX_NS = 'http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2'
+  PWX_NS = 'http://www.peaksware.com/PWX/1/0'
+end
+
+class UnsupportedFileType < StandardError
 end

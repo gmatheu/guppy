@@ -1,22 +1,80 @@
 module Guppy
   class Lap
-    attr_accessor :distance
-    attr_accessor :max_speed
-    attr_accessor :time
-    attr_accessor :calories
-    attr_accessor :average_heart_rate
-    attr_accessor :max_heart_rate
-    attr_reader   :track_points
-    
-    def initialize
-      @distance           = 0.0
-      @max_speed          = 0.0
-      @time               = 0.0
-      @calories           = 0
-      @average_heart_rate = 0
-      @max_heart_rate     = 0
-      @track_points       = []
+
+    attr_reader :parser, :node, :started_at, :elapsed_time, :distance, 
+      :avg_speed, :max_speed, :calories_burned, :avg_heart_rate, 
+      :max_heart_rate, :avg_cadence, :max_cadence, :start_elevation,
+      :max_elevation, :elevation_gained
+
+    def initialize(params={})
+      @parser = params.delete(:parser)
+      @node = params.delete(:node)
+
+      params.each_pair do |attr, value|
+        instance_variable_set(:"@#{attr}", value)
+      end
     end
+
+    def waypoints
+      @waypoints ||= parser.waypoints(node)
+    end
+
+    def elevation_gained
+      unless @elevation_gained
+        gained = 0
+        last_elevation = start_elevation
+
+        waypoints.each do |point|
+          if point.altitude > last_elevation
+            gained += point.altitude - last_elevation
+          end
+
+          last_elevation = point.altitude
+        end
+
+        @elevation_gained = gained.round(6)
+      end
+
+      @elevation_gained
+    end
+
+    def to_hash
+      {
+        :started_at => started_at,
+        :elapsed_time => elapsed_time,
+        :distance => distance,
+        :start_elevation => start_elevation,
+        :max_elevation => max_elevation,
+        :elevation_gained => elevation_gained,
+        :avg_speed => avg_speed,
+        :max_speed => max_speed,
+        :calories_burned => calories_burned,
+        :avg_heart_rate => avg_heart_rate,
+        :max_heart_rate => max_heart_rate,
+        :avg_cadence => avg_cadence,
+        :max_cadence => max_cadence
+      }
+    end
+
+    def inspect
+      %Q{
+        #<#{self.class}
+          started_at: "#{started_at}",
+          elapsed_time: #{elapsed_time},
+          distance: #{distance},
+          start_elevation: #{start_elevation},
+          max_elevation: #{max_elevation},
+          elevation_gained: #{elevation_gained},
+          avg_speed: #{avg_speed},
+          max_speed: #{max_speed},
+          calories_burned: #{calories_burned},
+          avg_heart_rate: #{avg_heart_rate},
+          max_heart_rate: #{max_heart_rate},
+          avg_cadence: #{avg_cadence},
+          max_cadence: #{max_cadence}>
+      }.gsub(/^\s+/, '').gsub(/\n/, ' ').squeeze(' ')
+    end
+    alias :to_s :inspect
 
   end
 end
