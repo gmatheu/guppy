@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{guppy}
-  s.version = "0.0.1"
+  s.name = "guppy"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Michael Moen"]
-  s.date = %q{2011-08-24}
-  s.description = %q{GPS data parser for .tcx files.}
-  s.email = %q{michael@underpantsgnome.com}
+  s.authors = ["Gonzalo Matheu"]
+  s.date = "2013-01-09"
+  s.description = "GPS data parser for .tcx files."
+  s.email = "gonzalommj@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -23,26 +23,41 @@ Gem::Specification.new do |s|
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
+    "MIT-LICENSE",
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "doc/jamis.rb",
     "guppy.gemspec",
     "lib/guppy.rb",
     "lib/guppy/activity.rb",
+    "lib/guppy/db.rb",
+    "lib/guppy/gpx_parser.rb",
     "lib/guppy/lap.rb",
     "lib/guppy/parser.rb",
     "lib/guppy/parser/tcx.rb",
+    "lib/guppy/tcx_parser.rb",
+    "lib/guppy/track_point.rb",
     "lib/guppy/utilities.rb",
     "lib/guppy/waypoint.rb",
     "spec/data/example.tcx",
     "spec/spec_helper.rb",
-    "spec/tcx_spec.rb"
+    "spec/tcx_spec.rb",
+    "test/fixtures/example.tcx",
+    "test/helper.rb",
+    "test/test_activity.rb",
+    "test/test_db.rb",
+    "test/test_gpx_parser.rb",
+    "test/test_guppy.rb",
+    "test/test_lap.rb",
+    "test/test_tcx_parser.rb",
+    "test/test_track_point.rb"
   ]
-  s.homepage = %q{http://github.com/UnderpantsGnome/guppy}
+  s.homepage = "http://github.com/gmatheu/guppy"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{GPS data parser.}
+  s.rubygems_version = "1.8.23"
+  s.summary = "GPS data parser."
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
@@ -50,24 +65,31 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<nokogiri>, ["~> 1.4.7"])
       s.add_development_dependency(%q<rspec>, ["~> 2.6.0"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.2.3"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
       s.add_development_dependency(%q<rcov>, ["~> 0.9.10"])
       s.add_development_dependency(%q<wirble>, [">= 0"])
+      s.add_development_dependency(%q<shoulda>, [">= 0"])
+      s.add_development_dependency(%q<flexmock>, [">= 0"])
     else
       s.add_dependency(%q<nokogiri>, ["~> 1.4.7"])
       s.add_dependency(%q<rspec>, ["~> 2.6.0"])
-      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_dependency(%q<bundler>, ["~> 1.2.3"])
       s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
       s.add_dependency(%q<rcov>, ["~> 0.9.10"])
       s.add_dependency(%q<wirble>, [">= 0"])
+      s.add_dependency(%q<shoulda>, [">= 0"])
+      s.add_dependency(%q<flexmock>, [">= 0"])
     end
   else
     s.add_dependency(%q<nokogiri>, ["~> 1.4.7"])
     s.add_dependency(%q<rspec>, ["~> 2.6.0"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<bundler>, ["~> 1.2.3"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
     s.add_dependency(%q<rcov>, ["~> 0.9.10"])
     s.add_dependency(%q<wirble>, [">= 0"])
+    s.add_dependency(%q<shoulda>, [">= 0"])
+    s.add_dependency(%q<flexmock>, [">= 0"])
   end
 end
+
