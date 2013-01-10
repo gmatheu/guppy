@@ -9,7 +9,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'guppy'
 
 def tcx_fixture_file
-  File.join(File.dirname(__FILE__), 'fixtures', 'example.tcx')
+  File.join(File.dirname(__FILE__), 'fixtures', 'forerunner-405.tcx')
 end
 
 def parsed_tcx
